@@ -38,6 +38,7 @@ void display () {
 }
 
 void move() {
+    if (!head || !(head -> next)) return;
     node *temp1 = head, *temp2;
     while (temp1 -> next) {
         temp2 = temp1;
