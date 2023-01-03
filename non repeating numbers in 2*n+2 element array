@@ -1,0 +1,48 @@
+vector<int> singleNumber(vector<int> nums) 
+    {
+        // Code here.
+        int n=nums.size();
+         int sum=0;int b[n],c=0,d[n],e=0,num1=0,num2=0;
+    for(int i=0;i<n;i++)
+    {
+        sum=sum^nums[i];
+    }
+    int pos=0;
+    while((sum&(1<<pos))==0)
+    {
+        pos++;
+    }
+    for(int i=0;i<n;i++)
+    {
+        if((nums[i]&(1<<pos))>0)
+        {
+            b[c++]=nums[i];
+        }
+        else
+        d[e++]=nums[i];
+    }
+    for(int i=0;i<c;i++)
+    {
+        num1=num1^b[i];
+    }
+    for(int i=0;i<e;i++)
+    {
+        num2=num2^d[i];
+    }
+    if(num1>num2)
+    {
+        return {num2,num1};
+    }
+    else 
+    {
+        return {num1,num2};
+    }
+    }
+    
+    CONCEPT
+    XOR OF SAME NUMBERS WILL RESULT IN 0 ,SO WHEN U XOR ALL THE NUMBERS U WILL BE LEFT WITH NUM1^NUM2
+    A BIT IS SET IN THE XORED ANS ONLY IF THE BIT IS PRESENT IN ANYONE OF THE TWO NUMBERS.................NOW FIND THE POSITION OF THE FIRST SET BIT
+    SO DIVIDE THE SET INTO 2 PARTS....................SET A WHOSE ELEMENTS HAS THE BIT AT THE FOUND POS & SET B WHOSE ELEMENTS DOESNT HAV THE BIT SET AT THE GIVEN POS
+    NOW XOR ALL THE ELEMENTS OF SET A WITH ITSELF ->THIS WILL GIV U NUM1
+    XOR ALL THE ELEMENTS OF SET B WITH ITSELF ->THIS WILL GIVE U NUM2(AS ALL THE SAME ELEMENTS WILL GET CANCELLED WHEN U XOR THEM)
+    
